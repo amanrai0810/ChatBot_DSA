@@ -1,6 +1,4 @@
-// DSA ChatBot - script.js
-// NOTE: Replace the API_KEY below with your actual Gemini API key
-const API_KEY = "YOUR_API_KEY";
+const API_KEY = "ENTER YOUR API KEY HERE";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
 const SYSTEM_INSTRUCTION = `You are a Data structure and Algorithm Instructor. You will only reply to the problem related to 
@@ -12,30 +10,35 @@ You have to reply him rudely if question is not related to Data structure and Al
 Else reply him politely with simple explanation.
 Use markdown-like formatting when needed: wrap code in triple backticks, use **bold** for key terms.`;
 
+
 let conversationHistory = [];
+
 
 async function sendMessage() {
   const input = document.getElementById('userInput');
   const text = input.value.trim();
   if (!text) return;
 
+  
   const welcome = document.getElementById('welcome');
   if (welcome) welcome.remove();
 
-  appendMessage('user', text);
 
-  
+  appendMessage('user', text);
   input.value = '';
   autoResize(input);
 
+ 
   conversationHistory.push({
     role: 'user',
     parts: [{ text }]
   });
 
+ 
   const typingEl = appendTyping();
 
   try {
+    
     const body = {
       system_instruction: {
         parts: [{ text: SYSTEM_INSTRUCTION }]
@@ -57,6 +60,7 @@ async function sendMessage() {
     const data = await response.json();
     const reply = data.candidates[0].content.parts[0].text;
 
+    
     conversationHistory.push({
       role: 'model',
       parts: [{ text: reply }]
@@ -73,10 +77,12 @@ async function sendMessage() {
   }
 }
 
+
 function detectRude(text) {
   const rudeWords = ['dumb', 'stupid', 'idiot', 'fool', 'nonsense', 'sensible question', 'irrelevant', 'off-topic'];
   return rudeWords.some(w => text.toLowerCase().includes(w));
 }
+
 
 function appendMessage(role, text, rude = false) {
   const chatbox = document.getElementById('chatbox');
@@ -97,6 +103,7 @@ function appendMessage(role, text, rude = false) {
   chatbox.appendChild(div);
   chatbox.scrollTop = chatbox.scrollHeight;
 }
+
 
 function appendTyping() {
   const chatbox = document.getElementById('chatbox');
@@ -128,21 +135,27 @@ function appendError(msg) {
   chatbox.appendChild(div);
 }
 
+
 function formatText(text) {
+ 
   text = text.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+ 
   text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+ 
   text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+ 
   text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
+ 
   text = text.replace(/\n/g, '<br/>');
   return text;
 }
 
+
 function askTopic(q) {
-  const input = document.getElementById('userInput');
-  input.value = q;
-  autoResize(input);
+  document.getElementById('userInput').value = q;
   sendMessage();
 }
+
 
 function clearChat() {
   conversationHistory = [];
@@ -164,6 +177,7 @@ function clearChat() {
     </div>`;
 }
 
+
 function handleKey(e) {
   if (e.key === 'Enter' && !e.shiftKey) {
     e.preventDefault();
@@ -171,7 +185,26 @@ function handleKey(e) {
   }
 }
 
+
 function autoResize(el) {
   el.style.height = 'auto';
   el.style.height = Math.min(el.scrollHeight, 120) + 'px';
 }
+
+
+function toggleSidebar() {
+  const sidebar = document.querySelector('aside');
+  sidebar.classList.toggle('open');
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.topic-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sidebar = document.querySelector('aside');
+      if (window.innerWidth <= 560) {
+        sidebar.classList.remove('open');
+      }
+    });
+  });
+});
