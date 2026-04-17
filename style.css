@@ -25,11 +25,15 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-mono);
-  height: 100vh;
+ 
+  height: 100dvh;
+  min-height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   position: relative;
+
+  -webkit-overflow-scrolling: touch;
 }
 
 
@@ -146,6 +150,8 @@ header {
   overflow: hidden;
   position: relative;
   z-index: 1;
+ 
+  min-height: 0;
 }
 
 
@@ -159,6 +165,7 @@ aside {
   flex-direction: column;
   gap: 6px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch; 
 }
 
 .sidebar-label {
@@ -207,6 +214,9 @@ aside {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  
+  min-height: 0;
+  min-width: 0;
 }
 
 #chatbox {
@@ -217,6 +227,9 @@ aside {
   flex-direction: column;
   gap: 16px;
   scroll-behavior: smooth;
+
+  -webkit-overflow-scrolling: touch;
+  min-height: 0;
 }
 
 #chatbox::-webkit-scrollbar { width: 4px; }
@@ -351,7 +364,7 @@ aside {
   border-top-left-radius: 3px;
 }
 
-/* Rude mode */
+
 .msg.bot.rude .bubble {
   border-color: var(--danger);
   background: rgba(255,77,109,0.05);
@@ -421,9 +434,14 @@ aside {
 
 .input-area {
   padding: 16px 24px;
+
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
   border-top: 1px solid var(--border);
   background: var(--surface);
   flex-shrink: 0;
+
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .input-wrap {
@@ -454,6 +472,8 @@ aside {
   max-height: 120px;
   min-height: 22px;
   line-height: 1.6;
+
+  font-size: max(13px, 16px);
 }
 
 #userInput::placeholder {
@@ -473,6 +493,8 @@ aside {
   flex-shrink: 0;
   transition: all 0.2s;
   box-shadow: 0 0 12px rgba(0,245,160,0.3);
+ 
+  -webkit-tap-highlight-color: transparent;
 }
 
 .send-btn:hover {
@@ -516,6 +538,8 @@ aside {
   cursor: pointer;
   font-size: 16px;
   transition: all 0.2s;
+ 
+  -webkit-tap-highlight-color: transparent;
 }
 
 .menu-btn:hover {
@@ -540,27 +564,26 @@ aside {
 
 @media (max-width: 560px) {
 
- 
   .menu-btn {
     display: block;
   }
-
 
   aside {
     display: none;
     position: fixed;
     top: 54px;
     left: 0;
-    height: calc(100vh - 54px);
+   
+    height: calc(100dvh - 54px);
     z-index: 100;
     width: 220px;
     box-shadow: 4px 0 20px rgba(0,0,0,0.5);
+    -webkit-overflow-scrolling: touch;
   }
 
   aside.open {
     display: flex;
   }
-
 
   header {
     padding: 0 14px;
@@ -581,7 +604,6 @@ aside {
     gap: 12px;
   }
 
-  
   .bubble {
     max-width: 82vw;
     font-size: 12px;
@@ -592,12 +614,12 @@ aside {
     max-width: 100%;
   }
 
- 
   .input-area {
     padding: 10px 12px;
+   
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
   }
 
-  
   .welcome h1 {
     font-size: 22px;
   }
@@ -615,4 +637,3 @@ aside {
     padding: 5px 10px;
   }
 }
-
