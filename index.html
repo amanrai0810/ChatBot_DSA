@@ -11,6 +11,7 @@
 
 <header>
   <div class="logo">
+    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
     <div class="logo-icon">🧩</div>
     <div class="logo-text">DSA<span>Bot</span></div>
   </div>
@@ -22,7 +23,7 @@
 
 <div class="main">
 
- 
+  <!-- Sidebar -->
   <aside>
     <div class="sidebar-label">Topics</div>
     <button class="topic-btn" onclick="askTopic('Explain Big O notation')"><span class="t-icon">📊</span> Big O Notation</button>
@@ -39,6 +40,7 @@
     <button class="topic-btn" onclick="clearChat()"><span class="t-icon">🗑️</span> Clear Chat</button>
   </aside>
 
+  <!-- Chat -->
   <div class="chat-wrap">
     <div id="chatbox">
       <div class="welcome" id="welcome">
