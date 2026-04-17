@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DSA Instructor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🧩</div>
+    <div class="logo-text">DSA<span>Bot</span></div>
+  </div>
+  <div class="status-badge">
+    <div class="status-dot"></div>
+    INSTRUCTOR ONLINE
+  </div>
+</header>
+
+<div class="main">
+
+ 
+  <aside>
+    <div class="sidebar-label">Topics</div>
+    <button class="topic-btn" onclick="askTopic('Explain Big O notation')"><span class="t-icon">📊</span> Big O Notation</button>
+    <button class="topic-btn" onclick="askTopic('Explain arrays vs linked lists')"><span class="t-icon">🔗</span> Arrays & Lists</button>
+    <button class="topic-btn" onclick="askTopic('How does a binary search tree work?')"><span class="t-icon">🌳</span> Trees & Graphs</button>
+    <button class="topic-btn" onclick="askTopic('Explain sorting algorithms with examples')"><span class="t-icon">🔃</span> Sorting</button>
+    <button class="topic-btn" onclick="askTopic('What is dynamic programming and how to use it?')"><span class="t-icon">🧩</span> Dynamic Prog.</button>
+    <button class="topic-btn" onclick="askTopic('Explain recursion with examples')"><span class="t-icon">🔁</span> Recursion</button>
+    <button class="topic-btn" onclick="askTopic('Explain stack and queue data structures')"><span class="t-icon">📚</span> Stack & Queue</button>
+    <button class="topic-btn" onclick="askTopic('Explain hashing and hash tables')"><span class="t-icon">#️⃣</span> Hashing</button>
+    <button class="topic-btn" onclick="askTopic('What is binary search and when to use it?')"><span class="t-icon">🔍</span> Binary Search</button>
+    <button class="topic-btn" onclick="askTopic('Explain graph traversal BFS and DFS')"><span class="t-icon">🗺️</span> BFS & DFS</button>
+    <div class="sidebar-divider"></div>
+    <button class="topic-btn" onclick="clearChat()"><span class="t-icon">🗑️</span> Clear Chat</button>
+  </aside>
+
+  <div class="chat-wrap">
+    <div id="chatbox">
+      <div class="welcome" id="welcome">
+        <span class="welcome-icon">🧠💻📊</span>
+        <h1>DSA Instructor</h1>
+        <p>Ask me anything about Data Structures & Algorithms.<br/>
+        I explain things simply — but ask me something off-topic<br/>and I won't be so gentle 😈</p>
+        <div class="quick-chips">
+          <div class="chip" onclick="askTopic('What is a heap and how does it work?')">Heap</div>
+          <div class="chip" onclick="askTopic('Explain merge sort with code')">Merge Sort</div>
+          <div class="chip" onclick="askTopic('What is a trie?')">Trie</div>
+          <div class="chip" onclick="askTopic('Explain Dijkstra algorithm')">Dijkstra</div>
+          <div class="chip" onclick="askTopic('What is memoization?')">Memoization</div>
+          <div class="chip" onclick="askTopic('Explain two pointer technique')">Two Pointers</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <div class="input-wrap">
+        <textarea id="userInput" rows="1" placeholder="Ask a DSA question..." onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="send-btn" onclick="sendMessage()">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="input-hint">Press Enter to send · Shift+Enter for new line</div>
+    </div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
